@@ -1,0 +1,11 @@
+EndfieldByButan
+Author: 罗醭坦 (lhclbt)
+Source: https://github.com/lhclbt/Endfield_Font
+License: Creative Commons Attribution-NonCommercial 4.0 International
+https://creativecommons.org/licenses/by-nc/4.0/
+
+Modifications: outline extraction, positioning, rotation, scaling, coloring,
+clipping, and opacity fades. This is a fan-made font reconstructed from
+Arknights / Arknights: Endfield. Some characters were added by the author
+and are not official game glyphs. The fictional script belongs to its
+respective rights holders.
