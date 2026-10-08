@@ -12,7 +12,7 @@
 
 ## 字体与动效
 
-SVG 中的字体全部为轮廓。访客不加载字体文件。GIF 为 56 帧、每帧 90ms，循环 5.04 秒；`hero.svg` 是静态替代图。页面提供静态图片入口，减少动态偏好使用 picture 的静态源。
+SVG 中的字体全部为轮廓。访客不加载字体文件。GIF 保留原来的 56 帧，每帧从 90ms 延长到 450ms，一圈由 5.04 秒变为 25.2 秒，旋转速度为原来的 1/5。`hero.svg` 是静态替代图；减少动态偏好优先使用 picture 的静态源。
 
 字体采用 EndfieldByButan、Noto Sans SC、Rajdhani、IBM Plex Mono，许可与改动说明见 ATTRIBUTION.md。
 

@@ -18,6 +18,8 @@ OUT=ROOT/'assets'
 OUT.mkdir(parents=True,exist_ok=True)
 W,H=1440,970
 PAPER='#ddddda'
+ANIMATION_FRAMES=56
+FRAME_DURATION_MS=450
 
 def contour_ground(a):
     x=np.linspace(0,514,160);y=np.linspace(0,H,240)
@@ -99,9 +101,9 @@ def main():
     front=Art(W,H,None)
     front.text(575,137,'TERRA',106,YELLOW,'sarkaz',9)
     front.text(575,953,'WELCOME HOME',45,YELLOW,'sarkaz',7)
-    for frame in range(56):
+    for frame in range(ANIMATION_FRAMES):
         img=base.image.copy();draw=ImageDraw.Draw(img)
-        for x,y,z in projection('gyroid',frame*math.tau/56,(988,526,378),(.72,0,-.22)):
+        for x,y,z in projection('gyroid',frame*math.tau/ANIMATION_FRAMES,(988,526,378),(.72,0,-.22)):
             if x<548 or x>1435:continue
             radius,color=style('gyroid',z)
             draw.ellipse((x-radius,y-radius,x+radius,y+radius),fill=color)
@@ -111,9 +113,10 @@ def main():
             info=PngImagePlugin.PngInfo();info.add_text('Source','Selected D, procedural contours and 3D point geometry; real font outlines. See ATTRIBUTION.md.')
             img.save(OUT/'hero-static.png',pnginfo=info)
         frames.append(img.quantize(palette=pal,dither=Image.Dither.NONE))
-    frames[0].save(OUT/'hero.gif',save_all=True,append_images=frames[1:],duration=90,loop=0,optimize=False,disposal=1,comment=b'ENDFIELD-TERRA selected D. Font attribution: ATTRIBUTION.md')
+    # Retain every original frame; retime the loop to one fifth of its speed.
+    frames[0].save(OUT/'hero.gif',save_all=True,append_images=frames[1:],duration=FRAME_DURATION_MS,loop=0,optimize=False,disposal=1,comment=b'ENDFIELD-TERRA selected D. 25.2 second cycle. Font attribution: ATTRIBUTION.md')
     base.save_svg(OUT/'hero.svg',''.join(dots)+''.join(front.parts))
-    result={'size':[W,H],'contour_paths':contours,'right_silhouette_rows':2,'point_scale':378,'companion_full_width':120,'companion_visible_width':60,'frames':56,'duration_ms':5040,'files':{name:{'bytes':(OUT/name).stat().st_size,'sha256':hashlib.sha256((OUT/name).read_bytes()).hexdigest()} for name in ['hero.svg','hero.gif','hero-static.png']}}
+    result={'size':[W,H],'contour_paths':contours,'right_silhouette_rows':2,'point_scale':378,'companion_full_width':120,'companion_visible_width':60,'frames':ANIMATION_FRAMES,'frame_duration_ms':FRAME_DURATION_MS,'duration_ms':ANIMATION_FRAMES*FRAME_DURATION_MS,'files':{name:{'bytes':(OUT/name).stat().st_size,'sha256':hashlib.sha256((OUT/name).read_bytes()).hexdigest()} for name in ['hero.svg','hero.gif','hero-static.png']}}
     (OUT/'manifest.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result,indent=2),flush=True)
 

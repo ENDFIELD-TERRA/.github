@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-reduced-motion: reduce)" srcset="https://raw.githubusercontent.com/ENDFIELD-TERRA/.github/main/assets/hero.svg">
-  <img src="https://raw.githubusercontent.com/ENDFIELD-TERRA/.github/main/assets/hero.gif" width="1440" alt="跨越边境，直至前线。白色等高线、双列纵排标语、裁切渐隐的萨卡兹副标与三维曲面点阵。">
+  <img src="https://raw.githubusercontent.com/ENDFIELD-TERRA/.github/main/assets/hero.gif?v=slow-5x" width="1440" alt="跨越边境，直至前线。白色等高线、双列纵排标语、裁切渐隐的萨卡兹副标与三维曲面点阵。">
 </picture>
 
 <sub>[查看静态主视觉](https://raw.githubusercontent.com/ENDFIELD-TERRA/.github/main/assets/hero.svg)</sub>

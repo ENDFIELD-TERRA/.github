@@ -9,15 +9,16 @@
   "companion_full_width": 120,
   "companion_visible_width": 60,
   "frames": 56,
-  "duration_ms": 5040,
+  "frame_duration_ms": 450,
+  "duration_ms": 25200,
   "files": {
     "hero.svg": {
       "bytes": 845825,
       "sha256": "1abd68aed53e174d0e8a854f7e506055ee91dde793d8a6cdb08a11aaa1d711fc"
     },
     "hero.gif": {
-      "bytes": 4733806,
-      "sha256": "5008954838fd29d0dde03f1b35c4e1d459c0e2452591614a6995342168f2fc93"
+      "bytes": 4733825,
+      "sha256": "8bd6af5011d5aa1a72db3fb6a805a3dc76a55078ae53af5fec27b144b229fef4"
     },
     "hero-static.png": {
       "bytes": 247868,
