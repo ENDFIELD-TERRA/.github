@@ -18,8 +18,9 @@ OUT=ROOT/'assets'
 OUT.mkdir(parents=True,exist_ok=True)
 W,H=1440,970
 PAPER='#ddddda'
-ANIMATION_FRAMES=56
-FRAME_DURATION_MS=450
+ANIMATION_FRAMES=280
+FRAME_DURATION_MS=90
+GIF_FRAME_STEP=5
 
 def contour_ground(a):
     x=np.linspace(0,514,160);y=np.linspace(0,H,240)
@@ -113,10 +114,12 @@ def main():
             info=PngImagePlugin.PngInfo();info.add_text('Source','Selected D, procedural contours and 3D point geometry; real font outlines. See ATTRIBUTION.md.')
             img.save(OUT/'hero-static.png',pnginfo=info)
         frames.append(img.quantize(palette=pal,dither=Image.Dither.NONE))
-    # Retain every original frame; retime the loop to one fifth of its speed.
-    frames[0].save(OUT/'hero.gif',save_all=True,append_images=frames[1:],duration=FRAME_DURATION_MS,loop=0,optimize=False,disposal=1,comment=b'ENDFIELD-TERRA selected D. 25.2 second cycle. Font attribution: ATTRIBUTION.md')
+    # Five times as many projected poses preserve the original display cadence.
+    frames[0].save(OUT/'hero.webp',save_all=True,append_images=frames[1:],duration=FRAME_DURATION_MS,loop=0,lossless=True,quality=70,method=4)
+    fallback=frames[::GIF_FRAME_STEP]
+    fallback[0].save(OUT/'hero.gif',save_all=True,append_images=fallback[1:],duration=FRAME_DURATION_MS*GIF_FRAME_STEP,loop=0,optimize=False,disposal=1,comment=b'ENDFIELD-TERRA selected D. 25.2 second cycle. Font attribution: ATTRIBUTION.md')
     base.save_svg(OUT/'hero.svg',''.join(dots)+''.join(front.parts))
-    result={'size':[W,H],'contour_paths':contours,'right_silhouette_rows':2,'point_scale':378,'companion_full_width':120,'companion_visible_width':60,'frames':ANIMATION_FRAMES,'frame_duration_ms':FRAME_DURATION_MS,'duration_ms':ANIMATION_FRAMES*FRAME_DURATION_MS,'files':{name:{'bytes':(OUT/name).stat().st_size,'sha256':hashlib.sha256((OUT/name).read_bytes()).hexdigest()} for name in ['hero.svg','hero.gif','hero-static.png']}}
+    result={'size':[W,H],'contour_paths':contours,'right_silhouette_rows':2,'point_scale':378,'companion_full_width':120,'companion_visible_width':60,'frames':ANIMATION_FRAMES,'frame_duration_ms':FRAME_DURATION_MS,'duration_ms':ANIMATION_FRAMES*FRAME_DURATION_MS,'gif_fallback_frames':len(fallback),'gif_frame_duration_ms':FRAME_DURATION_MS*GIF_FRAME_STEP,'files':{name:{'bytes':(OUT/name).stat().st_size,'sha256':hashlib.sha256((OUT/name).read_bytes()).hexdigest()} for name in ['hero.svg','hero.webp','hero.gif','hero-static.png']}}
     (OUT/'manifest.json').write_text(json.dumps(result,indent=2),encoding='utf-8')
     print(json.dumps(result,indent=2),flush=True)
 

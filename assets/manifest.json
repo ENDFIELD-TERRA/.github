@@ -8,8 +8,8 @@
   "point_scale": 378,
   "companion_full_width": 120,
   "companion_visible_width": 60,
-  "frames": 56,
-  "frame_duration_ms": 450,
+  "frames": 280,
+  "frame_duration_ms": 90,
   "duration_ms": 25200,
   "files": {
     "hero.svg": {
@@ -23,6 +23,12 @@
     "hero-static.png": {
       "bytes": 247868,
       "sha256": "120d13246ad2d5434fe1a8dc680e9b1827b963ed1df773fa65f551d48bbad218"
+    },
+    "hero.webp": {
+      "bytes": 18966654,
+      "sha256": "732bd8b048cc05b527af5355c61cead64ebe0dbb4f8f13a14b8143ca3a7df33f"
     }
-  }
+  },
+  "gif_fallback_frames": 56,
+  "gif_frame_duration_ms": 450
 }
